@@ -7,7 +7,9 @@ const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
 const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
 function Keyboard() {
-  const { onEnter, onDelete, onSelectLetter } = useContext(AppContext);
+  const { onEnter, onDelete, onSelectLetter, disabledLetters } = useContext(
+    AppContext
+  );
 
   const handleKeyboard = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
@@ -38,20 +40,20 @@ function Keyboard() {
     <div className="keyboard" onKeyDown={handleKeyboard} tabIndex={0}>
       <div className="line1">
         {keys1.map((key, i) => (
-          <Key key={i} keyVal={key} />
+          <Key key={i} keyVal={key} disabled={disabledLetters.includes(key)} />
         ))}
       </div>
       <div className="line2">
         {keys2.map((key, i) => (
-          <Key key={i} keyVal={key} />
+          <Key key={i} keyVal={key} disabled={disabledLetters.includes(key)} />
         ))}
       </div>
       <div className="line3">
-        <Key keyVal={"ENTER"} bigKey={true} />
+        <Key keyVal={"ENTER"} bigKey={true} disabled={false} />
         {keys3.map((key, i) => (
-          <Key key={i} keyVal={key} />
+          <Key key={i} keyVal={key} disabled={disabledLetters.includes(key)} />
         ))}
-        <Key keyVal={"DELETE"} bigKey={true} />
+        <Key keyVal={"DELETE"} bigKey={true} disabled={false} />
       </div>
     </div>
   );

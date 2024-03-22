@@ -4,9 +4,10 @@ import { AppContext } from "../App";
 interface Props {
   keyVal: string;
   bigKey?: boolean;
+  disabled: boolean;
 }
 
-function Key({ keyVal, bigKey }: Props) {
+function Key({ keyVal, bigKey, disabled }: Props) {
   const { onEnter, onDelete, onSelectLetter } = useContext(AppContext);
 
   function selectLetter() {
@@ -19,7 +20,11 @@ function Key({ keyVal, bigKey }: Props) {
     }
   }
   return (
-    <div id={bigKey ? "big" : ""} className="key" onClick={selectLetter}>
+    <div
+      id={bigKey ? "big" : disabled ? "disabled" : ""}
+      className="key"
+      onClick={selectLetter}
+    >
       {keyVal}
     </div>
   );
